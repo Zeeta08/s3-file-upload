@@ -1,0 +1,73 @@
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Upload to S3</title>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1354.0.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2em;
+      background: #f4f4f4;
+    }
+    input[type="file"] {
+      margin: 1em 0;
+    }
+    button {
+      padding: 0.6em 1.2em;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Upload a File to S3</h1>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+  <input type="file" id="file-upload" />
+  <button onclick="upload()">Upload</button>
+</div>
+
+
+  <p id="status"></p>
+
+  <script>
+    AWS.config.update({
+      accessKeyId: "AKIA55G4LYH7526OBJT2",
+      secretAccessKey: "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",
+      region: "us-east-1"
+    });
+
+    const s3 = new AWS.S3();
+
+    function upload() {
+      const files = document.getElementById('file-upload').files;
+      if (!files.length) return alert("Please select a file.");
+      const file = files[0];
+      const params = {
+        Bucket: "zeetalbucket",
+        Key: file.name,
+        Body: file,
+        
+      };
+
+      s3.upload(params, function(err, data) {
+        const status = document.getElementById('status');
+        if (err) {
+          status.innerText = "Upload failed: " + err.message;
+        } else {
+          status.innerHTML = "✅ File uploaded successfully: <a href='" + data.Location + "' target='_blank'>" + data.Location + "</a>";
+
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
+```
