@@ -29,7 +29,7 @@ This project is a simple web application that allows users to upload files (e.g.
 - Deploying static websites on AWS S3
 🌐 Live Demo
 > If hosted:  
-[Visit the static site 📁 Sample File Link  https://zeetalbucket.s3.amazonaws.com/WIN_20250130_09_07_14_Pro.jpg
+[Visit the static site 📁 Sample File Link  https://zeetalbucket.s3.us-east-1.amazonaws.com/upload.html
 
 > Replace with your actual file name or test file:
  
